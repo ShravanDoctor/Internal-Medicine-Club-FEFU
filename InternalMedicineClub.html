@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Medicine Club - Far Eastern Federal University</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .club-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        /* Main Content Styles */
+        .welcome-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .welcome-section h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-section p {
+            font-size: 18px;
+            color: #555;
+        }
+        
+        /* Info Box Styles */
+        .info-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .next-class-box {
+            flex: 0 0 30%;
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .next-class-box h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        .next-class-date {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .next-class-topic {
+            font-size: 18px;
+            font-style: italic;
+        }
+        
+        .contacts-box {
+            flex: 0 0 30%;
+            background-color: #2ecc71;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .contacts-box h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .contact-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .drive-link-box {
+            flex: 0 0 30%;
+            background-color: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .drive-link-box h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .drive-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: white;
+            color: #e74c3c;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .drive-button:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .info-container {
+                flex-direction: column;
+            }
+            
+            .next-class-box,
+            .contacts-box,
+            .drive-link-box {
+                flex: 0 0 100%;
+                margin-bottom: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+            
+            .slideshow-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo and Club Name -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="YOUR_LOGO_URL" alt="Internal Medicine Club Logo" class="logo">
+                <h1 class="club-name">Internal Medicine Club</h1>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Photo Slideshow -->
+    <div class="container">
+        <div class="slideshow-container">
+            <div class="slide active" style="background-image: url('https://source.unsplash.com/random/1200x400/?medicine,university')"></div>
+            <div class="slide" style="background-image: url('https://source.unsplash.com/random/1200x400/?medical,students')"></div>
+            <div class="slide" style="background-image: url('https://source.unsplash.com/random/1200x400/?hospital,doctors')"></div>
+            <div class="slide" style="background-image: url('https://source.unsplash.com/random/1200x400/?anatomy,learning')"></div>
+        </div>
+    </div>
+    
+    <!-- Welcome Section -->
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Welcome to Internal Medicine Club of Far Eastern Federal University</h1>
+            <p>We aim to provide practical and theoretical knowledge, which are not taught in classes. We help you apply your known knowledge to better understand medicine and become doctors.</p>
+        </div>
+    </div>
+    
+    <!-- Information Boxes -->
+    <div class="container">
+        <div class="info-container">
+            <!-- Next Class Box -->
+            <div class="next-class-box">
+                <h2>Next Class</h2>
+                <div class="next-class-date">Friday, November 10, 2023</div>
+                <div class="next-class-topic">Cardiovascular Diseases: Diagnosis and Treatment</div>
+            </div>
+            
+            <!-- Contacts Box -->
+            <div class="contacts-box">
+                <h2>Contact Us</h2>
+                <div class="contact-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    <span>+7 (XXX) XXX-XXXX</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
+                    <span>medicineclub@fefu.edu</span>
+                </div>
+            </div>
+            
+            <!-- Google Drive Link -->
+            <div class="drive-link-box">
+                <h2>Study Materials</h2>
+                <a href="YOUR_GOOGLE_DRIVE_LINK" class="drive-button" target="_blank">Access Google Drive</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Internal Medicine Club - Far Eastern Federal University. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        // Change slide every 2 seconds
+        setInterval(nextSlide, 2000);
+        
+        // Replace placeholder content with your actual data
+        function updateNextClass() {
+            // Example: You could fetch this data from an API or update it manually
+            const nextClassDate = "Friday, November 10, 2023";
+            const nextClassTopic = "Cardiovascular Diseases: Diagnosis and Treatment";
+            
+            document.querySelector('.next-class-date').textContent = nextClassDate;
+            document.querySelector('.next-class-topic').textContent = nextClassTopic;
+        }
+        
+        // Initialize
+        updateNextClass();
+        
+        // You would add more JavaScript here for dynamic functionality
+        // For example, fetching real data from a database or API
+    </script>
+</body>
+</html>
