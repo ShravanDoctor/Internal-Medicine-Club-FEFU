@@ -119,6 +119,15 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
+       .next-class-box {
+            flex: 0 0 30%;
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
         .next-class-box h2 {
             margin-bottom: 10px;
             font-size: 22px;
@@ -132,10 +141,30 @@
         
         .next-class-topic {
             font-size: 18px;
+            margin-bottom: 10px
+        
+        }
+       .next-class-lecturers {
+            font-size: 16px;
             font-style: italic;
+            margin-bottom: 10px;
         }
         
-        .contacts-box {
+        .next-class-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .next-class-location svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+       .contacts-box {
             flex: 0 0 30%;
             background-color: #2ecc71;
             color: white;
@@ -151,6 +180,12 @@
         }
         
         .contact-item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-person {
             margin: 10px 0;
             display: flex;
             align-items: center;
@@ -240,7 +275,7 @@
     <header>
         <div class="container header-content">
             <div class="logo-container">
-                <img src="YOUR_LOGO_URL" alt="Internal Medicine Club Logo" class="logo">
+                <img src="https://drive.google.com/file/d/1mVOMvH_vC-BITlzFsChD155oIXl5Rem4/view?usp=sharing" alt="Internal Medicine Club Logo" class="logo">
                 <h1 class="club-name">Internal Medicine Club</h1>
             </div>
         </div>
@@ -268,29 +303,35 @@
     <div class="container">
         <div class="info-container">
             <!-- Next Class Box -->
-            <div class="next-class-box">
-                <h2>Next Class</h2>
-                <div class="next-class-date">Saturday, April 12, 2025</div>
-                <div class="next-class-topic">Review of IMC test</div>
-            </div>
+<!-- Next Class Box -->
+    <div class="next-class-box">
+        <h2>Next Class</h2>
+        <div class="next-class-date"></div>
+        <div class="next-class-topic"></div>
+        <div class="next-class-lecturers"></div>
+        <div class="next-class-location"></div>
+    </div>
             
             <!-- Contacts Box -->
             <div class="contacts-box">
                 <h2>Contact Us</h2>
+                <div class="contact-person">
+                    <span>Shravan Srinivasmurthy (President IMC)</span>
+                </div>
                 <div class="contact-item">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
                     <span>+7 (914) 076-4292</span>
                 </div>
                 <div class="contact-item">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail">
-                    <span>internalmedclubfefu@gmail.com</span>
+                    <span>medicineclub@fefu.edu</span>
                 </div>
             </div>
             
             <!-- Google Drive Link -->
             <div class="drive-link-box">
                 <h2>Study Materials</h2>
-                <a href="https://drive.google.com/drive/folders/1LLjj-0yw-jhqGfXbF54tDxGWThHPBPnO?usp=drive_link" class="drive-button" target="_blank">Access Google Drive</a>
+                <a href="YOUR_GOOGLE_DRIVE_LINK" class="drive-button" target="_blank">Access Google Drive</a>
             </div>
         </div>
     </div>
@@ -303,7 +344,7 @@
     </footer>
     
     <script>
-        // Slideshow functionality
+        // Slideshow functionality (unchanged)
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         
@@ -316,25 +357,89 @@
         function nextSlide() {
             showSlide(currentSlide + 1);
         }
-        
-        // Change slide every 2 seconds
         setInterval(nextSlide, 2000);
-        
-        // Replace placeholder content with your actual data
+
+// ===== AUTOMATIC CLASS SCHEDULING SYSTEM =====
+        const classSchedule = [
+            { 
+                date: "2023-12-15", 
+                topic: "Respiratory System Disorders",
+                lecturers: "Dr. Ivan Petrov",
+                location: "5th floor, Room 502"
+            },
+            { 
+                date: "2023-12-22", 
+                topic: "Neurological Examinations",
+                lecturers: "Dr. Elena Smirnova",
+                location: "5th floor, Room 502"
+            },
+            { 
+                date: "2024-01-12", 
+                topic: "Gastrointestinal Pathologies",
+                lecturers: "Dr. Mikhail Volkov",
+                location: "5th floor, Room 502"
+            },
+            { 
+                date: "2025-04-19", 
+                topic: "Exam questions discussion",
+                lecturers: "Abdul Fathaq, Shravan, Madhav",
+                location: "5th floor, Room 502"
+            }
+        ];
+
         function updateNextClass() {
-            // Example: You could fetch this data from an API or update it manually
-            const nextClassDate = "Friday, November 10, 2023";
-            const nextClassTopic = "Cardiovascular Diseases: Diagnosis and Treatment";
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
             
-            document.querySelector('.next-class-date').textContent = nextClassDate;
-            document.querySelector('.next-class-topic').textContent = nextClassTopic;
+            let nextClass = null;
+            for (const cls of classSchedule) {
+                const classDate = new Date(cls.date);
+                if (classDate >= today) {
+                    nextClass = cls;
+                    break;
+                }
+            }
+
+            const dateElement = document.querySelector('.next-class-date');
+            const topicElement = document.querySelector('.next-class-topic');
+            const lecturersElement = document.querySelector('.next-class-lecturers');
+            const locationElement = document.querySelector('.next-class-location');
+
+            if (nextClass) {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = new Date(nextClass.date).toLocaleDateString('en-US', options);
+                
+                dateElement.textContent = formattedDate;
+                topicElement.textContent = `${nextClass.topic}`;
+                lecturersElement.textContent = `by ${nextClass.lecturers}`;
+                locationElement.innerHTML = `
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/>
+                    </svg>
+                    ${nextClass.location}
+                `;
+            } else {
+                dateElement.textContent = "To be announced";
+                topicElement.textContent = "Check back later for updates";
+                locationElement.innerHTML = `
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/>
+                    </svg>
+                    Location to be announced
+                `;
+            }
         }
-        
-        // Initialize
-        updateNextClass();
-        
-        // You would add more JavaScript here for dynamic functionality
-        // For example, fetching real data from a database or API
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', updateNextClass);
+
+        // Update every day at midnight
+        setInterval(() => {
+            const now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0) {
+                updateNextClass();
+            }
+        }, 60000);
     </script>
 </body>
 </html>
